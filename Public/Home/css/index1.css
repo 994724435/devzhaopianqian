@@ -1,0 +1,11 @@
+﻿body { position: relative; overflow:hidden;}
+.zp { width: 100%;text-align:center; }
+.zppic { display: inline-block; max-width: 150px; max-height: 150px;border: 1px solid #dedede;box-shadow: 0px 0px 5px #dedede; padding: 5px;overflow: hidden}
+    .zppic img { width: 99%;}
+
+
+.bigpic { position: absolute; overflow: hidden; z-index: 99; }
+.bigpic img { width: 100%; }
+
+table { width:100%;}
+.th {height:40px; }
