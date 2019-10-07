@@ -27,13 +27,63 @@ class IndexController extends CommonController {
                     $data['addtime'] =date('Y-m-d H:i:s');
                     
                     M("pic")->add($data);
-                    echo "<script>alert('上传成功');window.location.href = '".__ROOT__."/index.php/Home/Index/index';</script>";
+
+                     $id =1; 
+                    if ($_GET['id']) {
+                        $id= $_GET['id'];
+                    }
+                   $res =  M("jump")->where(array('id'=>$id))->save(array('isadd'=>1));
+                    // echo "success";die;
+                    echo "<script>window.location.href = '".__ROOT__."/index.php/Home/Index/alert';</script>";
                 }
                  
             }
           
           }  
         $this->display();
+    }
+
+    public function indexnew(){
+       $mpic= M('pic');
+      
+       if (!session('page')){
+           session('page',1);
+       }
+        $page=session('page');
+       $res =  $mpic->limit(20)->order("id desc")->select();
+
+       $this->assign("res",$res);
+
+       $this->display();
+    }
+
+
+     public function indexduologo(){
+       $mpic= M('pic');
+      
+       if (!session('page')){
+           session('page',1);
+       }
+        $page=session('page');
+       $res =  $mpic->limit(20)->order("id desc")->select();
+       // print_r($res);die;
+       $this->assign("res",$res);
+
+       $this->display();
+    }
+
+     public function indexduo(){
+       $mpic= M('pic');
+      
+       if (!session('page')){
+           session('page',1);
+       }
+        $page=session('page');
+       $res =  $mpic->limit(20)->order("id desc")->select();
+       // print_r($res);die;
+       $this->assign("res",$res);
+
+       $this->display();
     }
 
     public function fang(){
@@ -121,6 +171,22 @@ class IndexController extends CommonController {
     }
 
 
+    public function isone(){
+        $id =1; 
+        if ($_GET['id']) {
+            $id= $_GET['id'];
+        }
+       $res =  M("jump")->where(array('id'=>$id))->find();
+       $result= 1;
+       if($res['url'] !="onehen"){
+         $result= 0;
+       }
+       if ($res['isadd'] ==1) {
+            M("jump")->where(array('id'=>$id))->save(array('isadd'=>0));
+       }
+       print_r($res['isadd']);
+    }
+
     public function one(){
         $mpic= M('pic');
         $res =  $mpic->where(array('ishide'=>0))->limit(20)->order("id desc")->select();
@@ -129,12 +195,46 @@ class IndexController extends CommonController {
         $this->display();
     }
 
+     public function logo(){
+       
+        $this->display();
+    }
+
+    public function onehen(){
+        $mpic= M('pic');
+        $res =  $mpic->where(array('ishide'=>0))->order("id desc")->select();
+        $this->assign("res",$res);
+        $this->assign("count",count($res)*2*1000 );
+        $this->display();
+    }
+
     public function kong(){
+         $id =1; 
+        if ($_GET['id']) {
+            $id= $_GET['id'];
+        }
+        $map['id'] = $id;
+        $isurl= M("jump")->where($map)->find();
         if($_POST){
-            M("jump")->save(array('url'=>$_POST['type']));
-            echo "<script>alert('修改成功,当前播放完立即跳转');window.location.href = '".__ROOT__."/index.php/Home/Index/kong';</script>";
+             $id =1; 
+            if ($_GET['id']) {
+              $id= $_GET['id'];
+            }
+
+			   
+            if (empty($isurl)) {
+                $data['id']=$id;
+                $data['url']=$_POST['type'];
+                M("jump")->add($data);
+            }else{
+                  $res =  M("jump")->where($map)->save(array('url'=>$_POST['type']));
+            }
+          
+		
+            echo "<script>alert('修改成功,当前播放完立即跳转');window.location.href = '".__ROOT__."/index.php/Home/Index/kong/id/".$id." ';</script>";
             exit();
         }
+        $this->assign("res",$isurl);
         $this->display();
     }
 }

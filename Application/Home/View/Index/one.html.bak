@@ -5,10 +5,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title></title>
+
 <link rel="stylesheet" type="text/css" href="__ROOT__/Public/Home/css/reset.css" />
 <link rel='stylesheet prefetch' href='__ROOT__/Public/Home/css/slick.css'>
 <link rel='stylesheet prefetch' href='__ROOT__/Public/Home/css/slick-theme.css'>
 <link rel="stylesheet" href="__ROOT__/Public/Home/css/style1.css">
+
 </head>
 <body>
 <div class="slide-container">
@@ -41,14 +43,9 @@
 	(function() {
 
 	  var slideContainer = $('.slide-container');
-	   $(".slide-container").css("width", window.innerWidth-20);  
-	  $(".clash-card__image--barbarian img").css("width", window.innerWidth-90);  
-	   $(".wrapper").css("width", window.innerWidth-20); 
-
-
-	  slideContainer.slickPlay({autoplay:true,autoplaySpeed:2000,arrows:false});
 	  
-
+	  slideContainer.slick({autoplay:true,autoplaySpeed:2000,arrows:false});
+	  
 	  $('.clash-card__image img').hide();
 	  $('.slick-active').find('.clash-card img').fadeIn(200);
 	  
@@ -64,7 +61,7 @@
 	  });
 	  
 
-	setTimeout(function(){ window.location.href="/index.php/Home/Index/one";}, {$count}000);
+	// setTimeout(function(){ window.location.href="/index.php/Home/Index/one";}, {$count}000);
 
 	})();
 </script>

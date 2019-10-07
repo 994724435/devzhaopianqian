@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="__ROOT__/Public/Home/css/reset.css" />
 <link rel='stylesheet prefetch' href='__ROOT__/Public/Home/css/slick.css'>
 <link rel='stylesheet prefetch' href='__ROOT__/Public/Home/css/slick-theme.css'>
-<link rel="stylesheet" href="__ROOT__/Public/Home/css/style1.css">
+<link rel="stylesheet" href="__ROOT__/Public/Home/css/style2.css">
 </head>
 <body>
 <div class="slide-container">
@@ -42,29 +42,41 @@
 
 	  var slideContainer = $('.slide-container');
 	   $(".slide-container").css("width", window.innerWidth-20);  
-	  $(".clash-card__image--barbarian img").css("width", window.innerWidth-90);  
+	    // $(".slide-container").css("border", "1px solid red");  
+	  $(".clash-card__image--barbarian img").css("width", window.innerWidth-20);  
+	  // $(".clash-card__image--barbarian img").css("border", "1px solid red");  
+
 	   $(".wrapper").css("width", window.innerWidth-20); 
 
 
-	  slideContainer.slickPlay({autoplay:true,autoplaySpeed:2000,arrows:false});
+	  slideContainer.slick({autoplay:true,autoplaySpeed:2000,arrows:false,pauseOnHover:false});
 	  
-
-	  $('.clash-card__image img').hide();
-	  $('.slick-active').find('.clash-card img').fadeIn(200);
+	  // $('.clash-card__image img').hide();
+	  // $('.slick-active').find('.clash-card img').fadeIn(200);
 	  
 
 	  // On before slide change
-	  slideContainer.on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-		$('.slick-active').find('.clash-card img').fadeOut(1000);
-	  });
+	 //  slideContainer.on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+		// $('.slick-active').find('.clash-card img').fadeOut(1000);
+	 //  });
 	  
-	  // On after slide change
-	  slideContainer.on('afterChange', function(event, slick, currentSlide) {
-		$('.slick-active').find('.clash-card img').fadeIn(200);
-	  });
-	  
+	 //  // On after slide change
+	 //  slideContainer.on('afterChange', function(event, slick, currentSlide) {
+		// $('.slick-active').find('.clash-card img').fadeIn(200);
+	 //  });
+	 setTimeout(function(){ window.location.href="/index.php/Home/Index/indexduologo/id/<?php echo $_GET['id']; ?>"; }, {$count}); 
 
-	setTimeout(function(){ window.location.href="/index.php/Home/Index/one";}, {$count}000);
+	setInterval(function(){ 
+		 $.ajax({url:"/index.php/Home/Index/isone/id/<?php echo $_GET['id']; ?>",success:function(result){
+		 	if(result ==1){
+		 		console.log(result);
+		 		window.location.href="/index.php/Home/Index/onehen/id/<?php echo $_GET['id']; ?>";
+		 	}else{
+		 		console.log("ok");
+		 	}
+       		
+    	}});
+	}, 5000);
 
 	})();
 </script>

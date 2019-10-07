@@ -5,13 +5,19 @@ class CommonController extends Controller {
 	public function _initialize(){
 		$function = explode('/',__ACTION__);
 		$curfunction =$function[count($function)-1];
-		$jump= M("jump")->find();
-		if ($jump['url'] != $curfunction &&  $curfunction!="kong"){
-             echo "<script>";
-            echo "window.location.href='".__ROOT__."/index.php/Home/Index/".$jump['url']."';";
-            echo "</script>";
-            exit;
-        }
+		 $id =1; 
+         if ($_GET['id']) {
+            $id= $_GET['id'];
+         }
+
+		// $jump= M("jump")->where(array('id'=>$id))->find();
+		// if ($jump['url'] != $curfunction &&  $curfunction!="kong" &&  $curfunction!="index" && $curfunction!="isone" && $curfunction!="alert"){
+		// 	$urlid="/id/".$id;
+  //           echo "<script>";
+  //           echo "window.location.href='".__ROOT__."/index.php/Home/Index/".$jump['url'].$urlid."';";
+  //           echo "</script>";
+  //           exit;
+  //       }
 
 //		session('uid',1);
 		// if(!session('uid')){
